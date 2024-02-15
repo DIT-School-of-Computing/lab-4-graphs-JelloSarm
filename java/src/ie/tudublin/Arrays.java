@@ -33,15 +33,9 @@ public class Arrays extends PApplet
 		size(500,500);
 		//fullScreen();
 
-		String[] m1 = months;
-		months[0] = "XXX";
-		print(m1[0]);
 		for(int i = 0; i < months.length; i ++)
 		{
 			println("Month: " + months[i] + "\t" + rainfall[i]);
-		}
-		for (String s : m1) {
-			println(s);
 		}
 
 		int minIndex = 0;
@@ -103,16 +97,19 @@ public class Arrays extends PApplet
 		stroke(255);
 		line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
 		line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
-
-
+		textSize(width/100);
 		// float w = width / (float)months.length;
 
 		for(int i = 0 ; i < months.length;  i ++)
 		{
-			
+			textSize(width/30.0f);
+			fill(255,0,255);
+			text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
+			textSize(width/32.0f);
+			text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
 			float x = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
 			fill(i*22, 255, 255);
-			rect(x+((width/months.length)), height - months.length * 3, ((width - months.length)/(months.length)), map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
+			rect(x+((width/months.length)), height - months.length * 3, ((width - months.length * 3)-(width/months.length))/months.length, map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
 		}
 
 	} 
