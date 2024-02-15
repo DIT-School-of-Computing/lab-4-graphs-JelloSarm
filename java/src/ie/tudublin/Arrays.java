@@ -28,7 +28,7 @@ public class Arrays extends PApplet
 
 	public void settings()
 	{
-		size(500, 500);
+		size(500,500);
 
 		String[] m1 = months;
 		months[0] = "XXX";
@@ -95,14 +95,20 @@ public class Arrays extends PApplet
 	
 	public void draw()
 	{	
-
+		
 		background(0);
-		float w = width / (float)months.length;
-		for(int i = 0 ; i < months.length ;  i ++)
+		stroke(255);
+		line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
+		line((width/months.length), height - months.length * 3, (width/months.length), height - months.length * 3);
+
+		float w = width / (float)months.length-10.0f;
+		for(int i = 0 ; i < months.length;  i ++)
 		{
-			float x = map1(i, 0, months.length, 0, width);
+			
+			float x = map1(i, 0, months.length+3.8f, 0.0f, width);
 			fill(i*22, 255, 255);
-			rect(x, height, w, -rainfall[i]);
+			rect(x+((width/months.length)), height - months.length * 3, w, (-rainfall[i]));
 		}
-	}
+
+	} 
 }
