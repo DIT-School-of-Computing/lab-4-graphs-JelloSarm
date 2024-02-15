@@ -10,6 +10,8 @@ public class Arrays extends PApplet
 
 	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
 
+	int rainfallMax = 500;
+	
 	public float map1(float a, float b, float c, float d, float e)
 	{
 		float r1 = c -b;
@@ -22,13 +24,14 @@ public class Arrays extends PApplet
 	void randomize()
 	{
 		for (int i = 0; i < rainfall.length; i++) {
-			rainfall[i] = random(500);
+			rainfall[i] = random(rainfallMax);
 		}
 	}
 
 	public void settings()
 	{
 		size(500,500);
+		//fullScreen();
 
 		String[] m1 = months;
 		months[0] = "XXX";
@@ -99,15 +102,17 @@ public class Arrays extends PApplet
 		background(0);
 		stroke(255);
 		line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
-		line((width/months.length), height - months.length * 3, (width/months.length), height - months.length * 3);
+		line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
 
-		float w = width / (float)months.length-10.0f;
+
+		// float w = width / (float)months.length;
+
 		for(int i = 0 ; i < months.length;  i ++)
 		{
 			
-			float x = map1(i, 0, months.length+3.8f, 0.0f, width);
+			float x = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
 			fill(i*22, 255, 255);
-			rect(x+((width/months.length)), height - months.length * 3, w, (-rainfall[i]));
+			rect(x+((width/months.length)), height - months.length * 3, ((width - months.length)/(months.length)), map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
 		}
 
 	} 
