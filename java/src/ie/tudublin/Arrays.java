@@ -32,8 +32,8 @@ public class Arrays extends PApplet
 
 	public void settings()
 	{
-		size(500,500);
-		//fullScreen();
+		//size(500,500);
+		fullScreen();
 
 		for(int i = 0; i < months.length; i ++)
 		{
@@ -93,9 +93,12 @@ public class Arrays extends PApplet
 	{	
 		switch(mode)
 		{
-			case 0:
+			case 1:
 				background(0);
+				textSize(width/50.0f);
 				stroke(255);
+				fill(255,0,255);
+				text("Press 0 to return to menu", width/2.5f, height/months.length);
 				line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
 				line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
 				// float w = width / (float)months.length;
@@ -105,17 +108,20 @@ public class Arrays extends PApplet
 					textSize(width/30.0f);
 					fill(255,0,255);
 					text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
-					textSize(width/32.0f);
-					text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
+					textSize(width/38.0f);
+					text(months[i], ((width / months.length) + (i*(width/months.length))/1.1f), height-months.length);
 					float x = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
 					fill(i*22, 255, 255);
 					rect(x+((width/months.length)), height - months.length * 3, ((width - months.length * 3)-(width/months.length))/months.length, map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
 				}
 				break;
 
-			case 1:
+			case 2:
 				background(0);
+				textSize(width/50.0f);
 				stroke(255);
+				fill(255,0,255);
+				text("Press 0 to return to menu", width/2.5f, height/months.length);
 				line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
 				line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
 				for(int i = 0 ; i < months.length;  i ++)
@@ -123,8 +129,8 @@ public class Arrays extends PApplet
 					textSize(width/30.0f);
 					fill(255,0,255);
 					text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
-					textSize(width/32.0f);
-					text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
+					textSize(width/38.0f);
+					text(months[i], ((width / months.length) + (i*(width/months.length))/1.1f), height-months.length);
 				}
 				for(int i = 1 ; i < months.length;  i ++)
 				{
@@ -136,6 +142,13 @@ public class Arrays extends PApplet
 					stroke(100,255,255);
 					line(x+(sizeOfbar)*1.5f, (height - months.length * 3)+(y), (nextx)+(sizeOfbar)*1.5f,(height - months.length * 3)+(nexty));
 				}
+				break;
+			case 0:
+				background(0);
+				fill(255,0,255);
+				textSize(width/25.0f);
+				text("Bar Chart : 1", width/2.5f, height/2.5f);
+				text("Line Chart : 2", width/2.55f, height/2.1f);
 				break;
 			default:
 				// pass
