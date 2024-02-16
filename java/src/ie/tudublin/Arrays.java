@@ -6,6 +6,8 @@ import processing.core.PApplet;
 
 public class Arrays extends PApplet
 {
+	int mode = 0;
+
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
 	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
@@ -83,34 +85,70 @@ public class Arrays extends PApplet
 
 	public void setup() {
 		colorMode(HSB);
-		background(0);
 		randomize();
-		
-		
 	}
 
 	
 	public void draw()
 	{	
-		
-		background(0);
-		stroke(255);
-		line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
-		line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
-		textSize(width/100);
-		// float w = width / (float)months.length;
-
-		for(int i = 0 ; i < months.length;  i ++)
+		switch(mode)
 		{
-			textSize(width/30.0f);
-			fill(255,0,255);
-			text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
-			textSize(width/32.0f);
-			text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
-			float x = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
-			fill(i*22, 255, 255);
-			rect(x+((width/months.length)), height - months.length * 3, ((width - months.length * 3)-(width/months.length))/months.length, map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
-		}
+			case 0:
+				background(0);
+				stroke(255);
+				line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
+				line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
+				// float w = width / (float)months.length;
+		
+				for(int i = 0 ; i < months.length;  i ++)
+				{
+					textSize(width/30.0f);
+					fill(255,0,255);
+					text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
+					textSize(width/32.0f);
+					text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
+					float x = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
+					fill(i*22, 255, 255);
+					rect(x+((width/months.length)), height - months.length * 3, ((width - months.length * 3)-(width/months.length))/months.length, map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length))));
+				}
+				break;
 
+			case 1:
+				background(0);
+				stroke(255);
+				line((width/months.length), height - months.length * 3, (width/months.length), (height/months.length));
+				line(width - months.length * 3, height - months.length * 3, (width/months.length), height - months.length * 3);
+				for(int i = 0 ; i < months.length;  i ++)
+				{
+					textSize(width/30.0f);
+					fill(255,0,255);
+					text(46*i, width/100.0f, ((height - months.length * 3) - (i*(height/months.length)/1.1f)));
+					textSize(width/32.0f);
+					text(months[i], ((width / months.length) + (i*(width/months.length))/1.15f), height-months.length);
+				}
+				for(int i = 1 ; i < months.length;  i ++)
+				{
+					float y = map1(rainfall[i - 1], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length)));
+					float x = map1(i - 1, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
+					float nextx = map1(i, 0, months.length, 0.0f, ((width - months.length * 3)-(width/months.length)));
+					float nexty = map1(rainfall[i], 0, rainfallMax, 0, -((height - months.length * 3)-(height/months.length)));
+					float sizeOfbar = width/months.length;
+					stroke(100,255,255);
+					line(x+(sizeOfbar)*1.5f, (height - months.length * 3)+(y), (nextx)+(sizeOfbar)*1.5f,(height - months.length * 3)+(nexty));
+				}
+				break;
+			default:
+				// pass
+				break;
+		}
+		
 	} 
+
+	public void keyPressed()
+    {
+        if (key >= '0' && key <= '9')
+        {
+            mode = key - '0';
+        }
+    }
 }
